@@ -14,5 +14,5 @@ spec:
     spec:
       containers:
       - name: script1
-        image: script1:latest
+        image: script1
         # imagePullPolicy: Never
