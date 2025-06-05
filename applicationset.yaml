@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/godzillaba/kube101
+        repoURL: https://github.com/godzillaba/argocd-testing
         revision: main
         directories:
           - path: '*'
@@ -16,7 +16,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/godzillaba/kube101
+        repoURL: https://github.com/godzillaba/argocd-testing
         targetRevision: main
         path: '{{path}}'
       destination:
