@@ -13,6 +13,31 @@ Perfect — here's your **0 → 1 setup** to build a single Git repo for deployi
 
 ## 🔧 Step-by-Step
 
+```sh
+minikube delete && \
+minikube start --driver=docker && \
+eval $(minikube docker-env) && \
+kubectl create namespace argocd && \
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml && \
+docker build -t script1:latest ./script1 && \
+docker build -t script2:latest ./script2 && \
+kubectl apply -f applicationset.yaml -n argocd
+
+# wait
+
+kubectl apply -f applicationset.yaml -n argocd
+
+kubectl -n argocd get secret argocd-initial-admin-secret \
+  -o jsonpath="{.data.password}" | base64 -d
+
+echo
+
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+
+
+```
+
 ### 1. **Start Minikube**
 
 ```sh
