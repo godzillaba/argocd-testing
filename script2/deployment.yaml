@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: script1
+  name: script2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: script1
+      app: script2
   template:
     metadata:
       labels:
-        app: script1
+        app: script2
     spec:
       containers:
-      - name: script1
-        image: script1:latest
+      - name: script2
+        image: script2:latest
         imagePullPolicy: Never
