@@ -15,7 +15,7 @@
 #       containers:
 #       - name: propmon
 #         image: propmon:latest
-#         imagePullPolicy: Never
+#         imagePullPolicy: IfNotPresent
 #         env:
 #         - name: ETH_RPC
 #           valueFrom:

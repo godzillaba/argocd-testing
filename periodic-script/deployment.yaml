@@ -15,4 +15,4 @@ spec:
           containers:
             - name: periodic-script
               image: periodic-script:latest
-              imagePullPolicy: Never
+              imagePullPolicy: IfNotPresent
