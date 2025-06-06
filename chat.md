@@ -25,6 +25,11 @@ docker build -t propmon:latest ./propmon && \
 kubectl wait pod -l app.kubernetes.io/name=argocd-application-controller -n argocd --for=condition=Ready --timeout=180s && \
 kubectl wait deployment argocd-server -n argocd --for=condition=Available --timeout=180s && \
 kubectl apply -f applicationset.yaml -n argocd && \
+kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/latest/download/controller.yaml && \
+kubectl wait --for=condition=available deployment sealed-secrets-controller -n kube-system --timeout=60s && \
+kubeseal --fetch-cert > sealed-secrets.crt && \
+kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/dummy-secret.yaml > ./long-script/dummy-sealed-secret.yaml && \
+kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > ./propmon/propmon-secret.yaml && \
 kubectl -n argocd get secret argocd-initial-admin-secret \
   -o jsonpath="{.data.password}" | base64 -d && \
 echo && \
@@ -34,8 +39,7 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443 > /dev/null 2>&1 &
 
 to set up sealed secrets:
 ```sh
-kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/latest/download/controller.yaml
-kubeseal --fetch-cert > sealed-secrets.crt
+
 ```
 
 to create a sealed secret:
