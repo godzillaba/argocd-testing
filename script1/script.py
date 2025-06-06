@@ -1,7 +1,10 @@
 import time
 import os
+import sys
 
-print('hello1', flush=True)
-print(os.environ.get('ENV1', '???'), flush=True)
+print('hello1')
+print(os.environ.get('ENV1', '???'))
+print(sys.argv)
+print(flush=True)
 
 time.sleep(120)
