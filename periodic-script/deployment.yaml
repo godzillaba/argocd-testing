@@ -1,18 +1,18 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: CronJob
 metadata:
   name: periodic-script
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: periodic-script
-  template:
-    metadata:
-      labels:
-        app: periodic-script
+  schedule: "* * * * *" 
+  jobTemplate:
     spec:
-      containers:
-      - name: periodic-script
-        image: periodic-script:latest
-        imagePullPolicy: Never
+      template:
+        metadata:
+          labels:
+            app: periodic-script
+        spec:
+          restartPolicy: OnFailure  # Good default for cron jobs
+          containers:
+            - name: periodic-script
+              image: periodic-script:latest
+              imagePullPolicy: Never
