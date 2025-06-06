@@ -15,7 +15,7 @@ spec:
       containers:
       - name: long-script
         image: long-script:latest
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         env:
         - name: ENV1
           value: "env1_value"
