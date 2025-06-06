@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: propmon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: propmon
+  template:
+    metadata:
+      labels:
+        app: propmon
+    spec:
+      containers:
+      - name: propmon
+        image: propmon:latest
+        imagePullPolicy: Never
+        env:
+        - name: ETH_RPC
+          valueFrom:
+            secretKeyRef:
+              name: propmon-secret
+              key: eth-rpc
+        - name: ARB_KEY
+          valueFrom:
+            secretKeyRef:
+              name: propmon-secret
+              key: private-key
+        - name: ETH_KEY
+          valueFrom:
+            secretKeyRef:
+              name: propmon-secret
+              key: private-key
+        - name: NOVA_KEY
+          valueFrom:
+            secretKeyRef:
+              name: propmon-secret
+              key: private-key
+

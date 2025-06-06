@@ -41,7 +41,6 @@ to create a sealed secret:
 ```sh
 # uncomment dummy-secret.yaml
 # value must be base64 encoded, so
-
 # echo 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 | base64
 
 kubeseal --cert sealed-secrets.crt -o yaml < dummy-secret.yaml > ./long-script/real-sealed-secret.yaml
