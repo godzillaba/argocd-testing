@@ -19,8 +19,9 @@ minikube start --driver=docker && \
 eval $(minikube docker-env) && \
 kubectl create namespace argocd && \
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml && \
-docker build -t script1:latest ./script1 && \
-docker build -t script2:latest ./script2 && \
+docker build -t long-script:latest ./long-script && \
+docker build -t periodic-script:latest ./periodic-script && \
+docker build -t propmon:latest ./propmon && \
 kubectl wait pod -l app.kubernetes.io/name=argocd-application-controller -n argocd --for=condition=Ready --timeout=180s && \
 kubectl wait deployment argocd-server -n argocd --for=condition=Available --timeout=180s && \
 kubectl apply -f applicationset.yaml -n argocd && \
