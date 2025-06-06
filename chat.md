@@ -19,17 +19,19 @@ minikube start --driver=docker && \
 eval $(minikube docker-env) && \
 kubectl create namespace argocd && \
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml && \
-docker build -t long-script:latest ./long-script && \
-docker build -t periodic-script:latest ./periodic-script && \
-docker build -t propmon:latest ./propmon && \
+docker build -t long-script:latest ./raw/long-script && \
+docker build -t periodic-script:latest ./raw/periodic-script && \
+docker build -t propmon:latest ./raw/propmon && \
+docker build -t fund-distribution-scripts:latest ./helm/fee-router && \
 kubectl wait pod -l app.kubernetes.io/name=argocd-application-controller -n argocd --for=condition=Ready --timeout=180s && \
 kubectl wait deployment argocd-server -n argocd --for=condition=Available --timeout=180s && \
 kubectl apply -f applicationset.yaml -n argocd && \
+kubectl apply -f helm-applicationset.yaml -n argocd && \
 kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/latest/download/controller.yaml && \
 kubectl wait --for=condition=available deployment sealed-secrets-controller -n kube-system --timeout=60s && \
 kubeseal --fetch-cert > sealed-secrets.crt && \
-kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/dummy-secret.yaml > ./long-script/dummy-sealed-secret.yaml && \
-kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > ./propmon/propmon-secret.yaml && \
+kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/dummy-secret.yaml > ./raw/long-script/dummy-sealed-secret.yaml && \
+kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > ./raw/propmon/propmon-secret.yaml && \
 kubectl -n argocd get secret argocd-initial-admin-secret \
   -o jsonpath="{.data.password}" | base64 -d && \
 echo && \
