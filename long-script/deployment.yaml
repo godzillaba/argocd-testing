@@ -19,5 +19,10 @@ spec:
         env:
         - name: ENV1
           value: "env1_value"
+        - name: SECRET
+          valueFrom:
+            secretKeyRef:
+              name: dummy-secret
+              key: foo
         args: [ "--foo", "bar" ]
 
