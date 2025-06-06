@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: script2
+  name: periodic-script
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: script2
+      app: periodic-script
   template:
     metadata:
       labels:
-        app: script2
+        app: periodic-script
     spec:
       containers:
-      - name: script2
-        image: script2:latest
+      - name: periodic-script
+        image: periodic-script:latest
         imagePullPolicy: Never

@@ -7,4 +7,4 @@ print(os.environ.get('ENV1', '???'))
 print(sys.argv)
 print(flush=True)
 
-time.sleep(120)
+time.sleep(1000000)
