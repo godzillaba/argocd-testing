@@ -19,3 +19,5 @@ spec:
         env:
         - name: ENV1
           value: "env1_value"
+        args: [ "--foo", "bar" ]
+
