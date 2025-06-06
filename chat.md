@@ -31,6 +31,18 @@ open http://localhost:8080 && \
 kubectl port-forward svc/argocd-server -n argocd 8080:443 > /dev/null 2>&1 &
 ```
 
+to set up sealed secrets:
+```sh
+kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/latest/download/controller.yaml
+kubeseal --fetch-cert > sealed-secrets.crt
+```
+
+to create a sealed secret:
+```sh
+kubeseal --cert sealed-secrets.crt -o yaml < mysecret.yaml > mysealedsecret.yaml
+
+```
+
 ### 1. **Start Minikube**
 
 ```sh
