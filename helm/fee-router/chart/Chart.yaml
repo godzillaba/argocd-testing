@@ -1,0 +1,5 @@
+apiVersion: v2
+name: fee-router-chart
+description: A Helm chart to poke reward router contracts as a CronJob
+type: application
+version: 0.1.0

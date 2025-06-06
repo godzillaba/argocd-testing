@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "fee-router.fullname" . }}
+spec:
+  schedule: "*/5 * * * *" # every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: fee-router
+              image: fund-distribution-scripts:latest
+              imagePullPolicy: IfNotPresent
+              # env:
+              #   - name: MESSAGE
+              #     value: "{{ .Values.message }}"
+              args: [ "{{ .Values.message }}" ]
+          restartPolicy: Never

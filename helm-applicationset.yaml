@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: kube101-raw
+  name: kube101-helm
   namespace: argocd
 spec:
   generators:
@@ -9,16 +9,19 @@ spec:
         repoURL: https://github.com/godzillaba/argocd-testing
         revision: use-helm
         directories:
-          - path: raw/*
+          - path: helm/*/instances/*
   template:
     metadata:
-      name: 'raw-{{path.basename}}'
+      name: 'helm-{{path.basename}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/godzillaba/argocd-testing
         targetRevision: use-helm
-        path: '{{path}}'
+        path: '{{path | regexReplaceAll "/instances/.*" "/chart" }}'
+        helm:
+          valueFiles:
+            - '{{path}}/values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: default
