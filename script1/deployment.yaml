@@ -16,3 +16,6 @@ spec:
       - name: script1
         image: script1:latest
         imagePullPolicy: Never
+        env:
+        - name: ENV1
+          value: "env1_value"
