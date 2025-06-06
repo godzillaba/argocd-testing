@@ -39,7 +39,7 @@ kubeseal --fetch-cert > sealed-secrets.crt
 
 to create a sealed secret:
 ```sh
-kubeseal --cert sealed-secrets.crt -o yaml < mysecret.yaml > mysealedsecret.yaml
+kubeseal --cert sealed-secrets.crt -o yaml < dummy-secret.yaml > ./long-script/real-sealed-secret.yaml
 
 ```
 
