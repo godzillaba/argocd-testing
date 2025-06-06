@@ -19,8 +19,8 @@ spec:
         env:
         - name: ENV1
           value: "env1_value"
-        - name: ENV1
-          value: "env1_value"
+        - name: ENV2
+          value: "env2_value"
         - name: SECRET
           valueFrom:
             secretKeyRef:
