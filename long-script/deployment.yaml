@@ -23,6 +23,6 @@ spec:
           valueFrom:
             secretKeyRef:
               name: dummy-secret
-              key: private-key
+              key: secret-key
         args: [ "--foo", "bar" ]
 
