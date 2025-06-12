@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: "job-{{ .Values.name }}"
 spec:
-  schedule: "* 0 * * *" 
+  schedule: "{{ .Values.schedule }}" 
   jobTemplate:
     spec:
       template:
@@ -38,7 +38,7 @@ spec:
                 - "route-parent-to-child"
                 {{- end }}
                 {{- if .Values.child_to_parent_reward_router_address }}
-                - "route-child-to-parent"
+                - "redeem-child-to-parent"
                 {{- end }}
                 - "--parentRPCUrl"
                 - "${PARENT_RPC_URL}"
