@@ -12,8 +12,41 @@ spec:
             - name: fee-router
               image: fund-distribution-scripts:latest
               imagePullPolicy: IfNotPresent
-              # env:
-              #   - name: MESSAGE
-              #     value: "{{ .Values.message }}"
-              args: [ "{{ .Values.message }}" ]
+              env:
+                - name: CHILD_CHAIN_PK
+                  valueFrom:
+                    secretKeyRef:
+                      name: fee-router-secret
+                      key: private-key
+                - name: PARENT_CHAIN_PK
+                  valueFrom:
+                    secretKeyRef:
+                      name: fee-router-secret
+                      key: private-key
+                - name: PARENT_RPC_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: fee-router-secret
+                      key: "{{ .Values.parent-chain-name }}-url"
+                - name: CHILD_RPC_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: fee-router-secret
+                      key: "{{ .Values.child-chain-name }}-url"
+              args:
+                - "route-parent-to-child"
+                - "--parentRPCUrl"
+                - "${PARENT_RPC_URL}"
+                - "--childRPCUrl"
+                - "${CHILD_RPC_URL}"
+                - "--ETHorTokenAddress"
+                - "ETH"
+                {{- if .Values.parent-to-child-reward-router-address }}
+                - "--parentToChildRewardRouterAddr"
+                - "{{ .Values.parent-to-child-reward-router-address }}"
+                {{- end }}
+                {{- if .Values.child-to-parent-reward-router-address }}
+                - "--childToParentRewardRouterAddr"
+                - "{{ .Values.child-to-parent-reward-router-address }}"
+                {{- end }}
           restartPolicy: Never

@@ -28,10 +28,9 @@ kubectl wait deployment argocd-server -n argocd --for=condition=Available --time
 kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/latest/download/controller.yaml && \
 kubectl wait --for=condition=available deployment sealed-secrets-controller -n kube-system --timeout=60s && \
 kubeseal --fetch-cert > sealed-secrets.crt && \
-kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/dummy-secret.yaml > ./raw/long-script/dummy-sealed-secret.yaml && \
-kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > ./raw/propmon/propmon-sealed-secret.yaml && \
 kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/dummy-secret.yaml > ./raw/secrets/dummy-sealed-secret.yaml && \
 kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > ./raw/secrets/propmon-sealed-secret.yaml && \
+kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/fee-router-secret.yaml > ./raw/secrets/fee-router-sealed-secret.yaml && \
 kubectl apply -f applicationset.yaml -n argocd && \
 kubectl apply -f helm-applicationset.yaml -n argocd && \
 kubectl -n argocd get secret argocd-initial-admin-secret \
