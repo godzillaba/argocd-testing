@@ -32,7 +32,7 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       name: fee-router-secret
-                      key: "{{ .Values.child-chain-name }}-url"
+                      key: "{{ .Values.child_chain_name }}-url"
               args:
                 - "route-parent-to-child"
                 - "--parentRPCUrl"
@@ -41,12 +41,12 @@ spec:
                 - "${CHILD_RPC_URL}"
                 - "--ETHorTokenAddress"
                 - "ETH"
-                {{- if .Values.parent-to-child-reward-router-address }}
+                {{- if .Values.parent_to_child_reward_router_address }}
                 - "--parentToChildRewardRouterAddr"
-                - "{{ .Values.parent-to-child-reward-router-address }}"
+                - "{{ .Values.parent_to_child_reward_router_address }}"
                 {{- end }}
-                {{- if .Values.child-to-parent-reward-router-address }}
+                {{- if .Values.child_to_parent_reward_router_address }}
                 - "--childToParentRewardRouterAddr"
-                - "{{ .Values.child-to-parent-reward-router-address }}"
+                - "{{ .Values.child_to_parent_reward_router_address }}"
                 {{- end }}
           restartPolicy: Never
