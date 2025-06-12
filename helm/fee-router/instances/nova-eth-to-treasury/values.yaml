@@ -1,4 +1,5 @@
 name: "nova-eth-to-treasury"
+subcommand: "redeem-child-to-parent"
 # schedule: "0 0 * * 3" # every wednesday at 00:00 UTC
 schedule: "* * * * *" # every minute for testing purposes
 child_chain_name: "nova"
