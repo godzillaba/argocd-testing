@@ -25,13 +25,15 @@ docker build -t propmon:latest ./raw/propmon && \
 docker build -t fund-distribution-scripts:latest ./helm/fee-router && \
 kubectl wait pod -l app.kubernetes.io/name=argocd-application-controller -n argocd --for=condition=Ready --timeout=180s && \
 kubectl wait deployment argocd-server -n argocd --for=condition=Available --timeout=180s && \
-kubectl apply -f applicationset.yaml -n argocd && \
-kubectl apply -f helm-applicationset.yaml -n argocd && \
 kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/latest/download/controller.yaml && \
 kubectl wait --for=condition=available deployment sealed-secrets-controller -n kube-system --timeout=60s && \
 kubeseal --fetch-cert > sealed-secrets.crt && \
 kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/dummy-secret.yaml > ./raw/long-script/dummy-sealed-secret.yaml && \
-kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > ./raw/propmon/propmon-secret.yaml && \
+kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > ./raw/propmon/propmon-sealed-secret.yaml && \
+kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/dummy-secret.yaml > ./raw/secrets/dummy-sealed-secret.yaml && \
+kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > ./raw/secrets/propmon-sealed-secret.yaml && \
+kubectl apply -f applicationset.yaml -n argocd && \
+kubectl apply -f helm-applicationset.yaml -n argocd && \
 kubectl -n argocd get secret argocd-initial-admin-secret \
   -o jsonpath="{.data.password}" | base64 -d && \
 echo && \
