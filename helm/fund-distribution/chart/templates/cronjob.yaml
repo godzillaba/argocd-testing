@@ -64,7 +64,7 @@ spec:
                   --parentToChildRewardRouterAddr "{{ .Values.parent_to_child_reward_router_address }}"
                   {{- end}}
                   {{- if eq .Values.subcommand "distribute" }}
-                  --rpcUrl "$RPC_URL"
+                  --rpcURL "$RPC_URL"
                   --rewardDistAddr "{{ .Values.reward_distributor_address }}"
                   {{- end}}
           restartPolicy: Never
