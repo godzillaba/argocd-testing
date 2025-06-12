@@ -1,5 +1,6 @@
 name: "nova-eth-to-treasury"
-schedule: "0 0 * * 3" # every wednesday at 00:00 UTC
+# schedule: "0 0 * * 3" # every wednesday at 00:00 UTC
+schedule: "* * * * *" # every minute for testing purposes
 child_chain_name: "nova"
 parent_chain_name: "eth"
 child_to_parent_reward_router_address: "0x36D0170D92F66e8949eB276C3AC4FEA64f83704d"
