@@ -34,7 +34,12 @@ spec:
                       name: fee-router-secret
                       key: "{{ .Values.child_chain_name }}-url"
               args:
+                {{- if .Values.parent_to_child_reward_router_address }}
                 - "route-parent-to-child"
+                {{- end }}
+                {{- if .Values.child_to_parent_reward_router_address }}
+                - "route-child-to-parent"
+                {{- end }}
                 - "--parentRPCUrl"
                 - "${PARENT_RPC_URL}"
                 - "--childRPCUrl"
