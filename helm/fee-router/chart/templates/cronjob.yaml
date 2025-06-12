@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: "job-{{ .Values.name }}"
+  name: "job-{{ .Values.name }}-{{path.basename}}"
 spec:
   schedule: "* * * * *" 
   jobTemplate:

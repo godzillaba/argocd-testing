@@ -12,7 +12,7 @@ spec:
           - path: helm/fee-router/instances/*
   template:
     metadata:
-      name: 'helm-fee-router-{{path.basename}}'
+      name: 'fee-router-{{path.basename}}'
     spec:
       project: default
       source:
