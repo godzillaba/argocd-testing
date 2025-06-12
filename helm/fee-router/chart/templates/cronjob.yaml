@@ -27,7 +27,7 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       name: fee-router-secret
-                      key: "{{ .Values.parent_chain_name }}-url"
+                      key: "{{ .Values.parent_chain_name }}"
                 - name: CHILD_RPC_URL
                   valueFrom:
                     secretKeyRef:
