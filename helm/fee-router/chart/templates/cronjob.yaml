@@ -41,7 +41,7 @@ spec:
                 - "redeem-child-to-parent"
                 {{- end }}
                 - "--parentRPCUrl"
-                - "${PARENT_RPC_URL}"
+                - "$PARENT_RPC_URL"
                 - "--childRPCUrl"
                 - "${CHILD_RPC_URL}"
                 - "--ETHorTokenAddress"
