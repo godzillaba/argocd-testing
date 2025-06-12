@@ -48,4 +48,5 @@ spec:
                   {{- if .Values.child_to_parent_reward_router_address }}
                   --childToParentRewardRouterAddr "{{ .Values.child_to_parent_reward_router_address }}"
                   {{- end }}
+                  --oneOff
           restartPolicy: Never
