@@ -38,9 +38,9 @@ spec:
                 - -c
               args:
                 - >
-                  yarn {{ .Values.subcommand }} --parentRPCUrl "$PARENT_RPC_URL" \
-                  --childRPCUrl "$CHILD_RPC_URL" \
-                  --ETHorTokenAddress ETH \
+                  yarn {{ .Values.subcommand }} --parentRPCUrl "$PARENT_RPC_URL"
+                  --childRPCUrl "$CHILD_RPC_URL"
+                  --ETHorTokenAddress ETH
                   {{- if .Values.parent_to_child_reward_router_address }}
                   --parentToChildRewardRouterAddr "{{ .Values.parent_to_child_reward_router_address }}" \
                   {{- end }}
