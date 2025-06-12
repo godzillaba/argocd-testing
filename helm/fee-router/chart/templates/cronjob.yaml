@@ -41,12 +41,12 @@ spec:
                   yarn {{ .Values.subcommand }} 
                   --parentRPCUrl "$PARENT_RPC_URL"
                   --childRPCUrl "$CHILD_RPC_URL"
-                  --ETHorTokenAddress ETH
-                  {{- if .Values.parent_to_child_reward_router_address }}
-                  --parentToChildRewardRouterAddr "{{ .Values.parent_to_child_reward_router_address }}"
-                  {{- end }}
-                  {{- if .Values.child_to_parent_reward_router_address }}
+                  {{- if .Values.subcommand == "redeem-child-to-parent" }}
                   --childToParentRewardRouterAddr "{{ .Values.child_to_parent_reward_router_address }}"
-                  {{- end }}
                   --oneOff
+                  {{- end}}
+                  {{- if .Values.subcommand == "route-parent-to-child" }}
+                  --ETHorTokenAddress ETH
+                  --parentToChildRewardRouterAddr "{{ .Values.parent_to_child_reward_router_address }}"
+                  {{- end}}
           restartPolicy: Never

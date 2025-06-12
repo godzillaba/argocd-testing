@@ -1,0 +1,7 @@
+name: "l1-eth-to-treasury"
+subcommand: "route-parent-to-child"
+# schedule: "0 0 * * 3" # every wednesday at 00:00 UTC
+schedule: "18 * * * *"
+child_chain_name: "arb"
+parent_chain_name: "eth"
+parent_to_child_reward_router_address: "0x40Cd7D713D7ae463f95cE5d342Ea6E7F5cF7C999"
