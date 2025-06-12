@@ -13,11 +13,14 @@ spec:
               image: fund-distribution-scripts:latest
               imagePullPolicy: IfNotPresent
               env:
+                # child chain PK required for all subcommands
                 - name: CHILD_CHAIN_PK
                   valueFrom:
                     secretKeyRef:
                       name: fee-router-secret
                       key: private-key
+                # env for routing
+                {{- if or (eq .Values.subcommand "route-parent-to-child") (eq .Values.subcommand "redeem-child-to-parent") }}
                 - name: PARENT_CHAIN_PK
                   valueFrom:
                     secretKeyRef:
@@ -33,20 +36,35 @@ spec:
                     secretKeyRef:
                       name: fee-router-secret
                       key: "{{ .Values.child_chain_name }}-url"
+                {{- end}}
+                # env for RD
+                {{- if eq .Values.subcommand "distribute" }}
+                - name: RPC_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: fee-router-secret
+                      key: "{{ .Values.chain_name }}-url"
+                {{- end}}
               command:
                 - /bin/sh
                 - -c
               args:
                 - >
-                  yarn {{ .Values.subcommand }} 
+                  yarn {{ .Values.subcommand }}
+                  {{- if eq .Values.subcommand "redeem-child-to-parent" }}
                   --parentRPCUrl "$PARENT_RPC_URL"
                   --childRPCUrl "$CHILD_RPC_URL"
-                  {{- if eq .Values.subcommand "redeem-child-to-parent" }}
                   --childToParentRewardRouterAddr "{{ .Values.child_to_parent_reward_router_address }}"
                   --oneOff
                   {{- end}}
                   {{- if eq .Values.subcommand "route-parent-to-child" }}
+                  --parentRPCUrl "$PARENT_RPC_URL"
+                  --childRPCUrl "$CHILD_RPC_URL"
                   --ETHorTokenAddress ETH
                   --parentToChildRewardRouterAddr "{{ .Values.parent_to_child_reward_router_address }}"
+                  {{- end}}
+                  {{- if eq .Values.subcommand "distribute" }}
+                  --rpcUrl "$RPC_URL"
+                  --rewardDistAddr "{{ .Values.reward_distributor_address }}"
                   {{- end}}
           restartPolicy: Never
