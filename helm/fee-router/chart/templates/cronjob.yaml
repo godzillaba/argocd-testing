@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: "JOB-{{ .Values.name }}"
+  name: "job-{{ .Values.name }}"
 spec:
   schedule: "*/5 * * * *" # every 5 minutes
   jobTemplate:
