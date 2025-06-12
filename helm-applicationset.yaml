@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: kube101-helm-fee-router
+  name: fund-distribution
   namespace: argocd
 spec:
   generators:
@@ -9,16 +9,16 @@ spec:
         repoURL: https://github.com/godzillaba/argocd-testing
         revision: use-helm
         directories:
-          - path: helm/fee-router/instances/*
+          - path: helm/fund-distribution/instances/*
   template:
     metadata:
-      name: 'fee-router-{{path.basename}}'
+      name: 'fund-distribution-{{path.basename}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/godzillaba/argocd-testing
         targetRevision: use-helm
-        path: 'helm/fee-router/chart'
+        path: 'helm/fund-distribution/chart'
         helm:
           valueFiles:
             - '../instances/{{path.basename}}/values.yaml'

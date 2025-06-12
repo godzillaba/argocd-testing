@@ -9,7 +9,7 @@ spec:
       template:
         spec:
           containers:
-            - name: fee-router
+            - name: fund-distribution
               image: fund-distribution-scripts:latest
               imagePullPolicy: IfNotPresent
               env:
@@ -17,24 +17,24 @@ spec:
                 - name: CHILD_CHAIN_PK
                   valueFrom:
                     secretKeyRef:
-                      name: fee-router-secret
+                      name: fund-distribution-secret
                       key: private-key
                 # env for routing
                 {{- if or (eq .Values.subcommand "route-parent-to-child") (eq .Values.subcommand "redeem-child-to-parent") }}
                 - name: PARENT_CHAIN_PK
                   valueFrom:
                     secretKeyRef:
-                      name: fee-router-secret
+                      name: fund-distribution-secret
                       key: private-key
                 - name: PARENT_RPC_URL
                   valueFrom:
                     secretKeyRef:
-                      name: fee-router-secret
+                      name: fund-distribution-secret
                       key: "{{ .Values.parent_chain_name }}-url"
                 - name: CHILD_RPC_URL
                   valueFrom:
                     secretKeyRef:
-                      name: fee-router-secret
+                      name: fund-distribution-secret
                       key: "{{ .Values.child_chain_name }}-url"
                 {{- end}}
                 # env for RD
@@ -42,7 +42,7 @@ spec:
                 - name: RPC_URL
                   valueFrom:
                     secretKeyRef:
-                      name: fee-router-secret
+                      name: fund-distribution-secret
                       key: "{{ .Values.chain_name }}-url"
                 {{- end}}
               command:
