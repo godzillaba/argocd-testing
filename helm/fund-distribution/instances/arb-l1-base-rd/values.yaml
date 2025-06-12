@@ -1,5 +1,5 @@
 name: "arb-l1-base-rd"
 subcommand: "distribute"
-schedule: "44 * * * *"
+schedule: "52 * * * *"
 chain_name: "arb"
 reward_distributor_address: "0xbF5041Fc07E1c866D15c749156657B8eEd0fb649"
