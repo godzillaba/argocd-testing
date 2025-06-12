@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: kube101-helm
+  name: kube101-helm-fee-router
   namespace: argocd
 spec:
   generators:
@@ -9,19 +9,19 @@ spec:
         repoURL: https://github.com/godzillaba/argocd-testing
         revision: use-helm
         directories:
-          - path: helm/*/instances/*
+          - path: helm/fee-router/instances/*
   template:
     metadata:
-      name: 'helm-{{path.basename}}'
+      name: 'helm-fee-router-{{path.basename}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/godzillaba/argocd-testing
         targetRevision: use-helm
-        path: '{{path | regexReplaceAll "/instances/.*" "/chart" }}'
+        path: 'helm/fee-router/chart'
         helm:
           valueFiles:
-            - '{{path}}/values.yaml'
+            - '../instances/{{path.basename}}/values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: default
