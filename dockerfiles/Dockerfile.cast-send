@@ -1,0 +1,10 @@
+FROM ghcr.io/foundry-rs/foundry:stable
+
+RUN cat <<'EOF' > /home/foundry/exec.sh
+#!/bin/sh
+cast send --rpc-url "$RPC_URL" --private-key "$PRIVATE_KEY" "$@"
+EOF
+
+RUN chmod +x /home/foundry/exec.sh
+
+ENTRYPOINT ["/home/foundry/exec.sh"]

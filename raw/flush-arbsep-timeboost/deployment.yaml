@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: flush-arbsep-timeboost
+spec:
+  schedule: "0 0 * * 4" 
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: flush-arbsep-timeboost
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: sweep-arbsep-timeboost
+              image: cast-send:latest
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: RPC_URL
+                  value: "https://sepolia-rollup.arbitrum.io/rpc"
+                - name: PRIVATE_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: flush-timeboost-secret
+                      key: devnet-private-key
+              args: [ "0x991DbEDf388CB5925318f06362D4fCa7b040527D", "\"flushBeneficiaryBalance()\"" ]
+
+
