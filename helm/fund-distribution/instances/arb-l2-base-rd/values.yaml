@@ -1,4 +1,4 @@
-name: "arb-l1-base-rd"
+name: "arb-l2-base-rd"
 subcommand: "distribute"
 schedule: "4 0 * * 3"
 chain_name: "arb"
