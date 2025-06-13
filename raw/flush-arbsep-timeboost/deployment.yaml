@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: flush-arbsep-timeboost
 spec:
-  schedule: "0 0 * * 4" 
+  schedule: "40 * * * *" 
   jobTemplate:
     spec:
       template:
