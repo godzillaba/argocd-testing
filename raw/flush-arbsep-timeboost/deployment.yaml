@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: flush-arbsep-timeboost
 spec:
-  schedule: "42 * * * *" 
+  schedule: "*/2 * * * *" 
   jobTemplate:
     spec:
       template:
@@ -24,6 +24,6 @@ spec:
                     secretKeyRef:
                       name: flush-timeboost-secret
                       key: devnet-private-key
-              args: [ "0x991DbEDf388CB5925318f06362D4fCa7b040527D", "\"flushBeneficiaryBalance()\"" ]
+              args: [ "0x991DbEDf388CB5925318f06362D4fCa7b040527D", "flushBeneficiaryBalance()" ]
 
 
