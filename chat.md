@@ -31,7 +31,7 @@ kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > 
 kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/fund-distribution-secret.yaml > ./raw/secrets/fund-distribution-sealed-secret.yaml && \
 kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/flush-timeboost-secret.yaml > ./raw/secrets/flush-timeboost-sealed-secret.yaml && \
 kubectl apply -f applicationset.yaml -n argocd && \
-kubectl apply -f helm-applicationset.yaml -n argocd && \
+kubectl apply -f fund-distribution-applicationset.yaml -n argocd && \
 kubectl -n argocd get secret argocd-initial-admin-secret \
   -o jsonpath="{.data.password}" | base64 -d && \
 echo && \
