@@ -7,7 +7,7 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/godzillaba/argocd-testing
-        revision: use-helm
+        revision: main
         directories:
           - path: raw/*
   template:
@@ -17,7 +17,7 @@ spec:
       project: default
       source:
         repoURL: https://github.com/godzillaba/argocd-testing
-        targetRevision: use-helm
+        targetRevision: main
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
