@@ -1,4 +1,4 @@
-schedule: "0 * * * *" # every hour
+schedule: "* * * * *" # every hour
 child_chain_name: "arb-sepolia"
 parent_chain_name: "sepolia"
 inbox: "0xaAe29B0366299461418F5324a79Afc425BE5ae21"
