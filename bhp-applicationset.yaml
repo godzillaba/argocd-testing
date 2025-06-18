@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: block-hash-pusher
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/godzillaba/argocd-testing
+        revision: main
+        directories:
+          - path: helm/block-hash-pusher/instances/*
+  template:
+    metadata:
+      name: 'block-hash-pusher-{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/godzillaba/argocd-testing
+        targetRevision: main
+        path: 'helm/block-hash-pusher/chart'
+        helm:
+          valueFiles:
+            - '../instances/{{path.basename}}/values.yaml'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

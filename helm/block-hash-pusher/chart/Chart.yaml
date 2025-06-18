@@ -1,0 +1,5 @@
+apiVersion: v2
+name: block-hash-pusher-chart
+description: A Helm chart to poke the block hash pusher as a CronJob
+type: application
+version: 0.1.0
