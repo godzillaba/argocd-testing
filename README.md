@@ -18,6 +18,7 @@ kubeseal --fetch-cert > sealed-secrets.crt && \
 kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/propmon-secret.yaml > ./raw/secrets/propmon-sealed-secret.yaml && \
 kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/fund-distribution-secret.yaml > ./raw/secrets/fund-distribution-sealed-secret.yaml && \
 kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/flush-timeboost-secret.yaml > ./raw/secrets/flush-timeboost-sealed-secret.yaml && \
+kubeseal --cert sealed-secrets.crt -o yaml < real-secrets/block-hash-pusher-secret.yaml > ./raw/secrets/block-hash-pusher-sealed-secret.yaml && \
 kubectl apply -f applicationset.yaml -n argocd && \
 kubectl apply -f fund-distribution-applicationset.yaml -n argocd && \
 kubectl apply -f bhp-applicationset.yaml -n argocd && \

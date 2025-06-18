@@ -1,4 +1,3 @@
-subcommand: "redeem-child-to-parent"
 schedule: "0 * * * *" # every hour
 child_chain_name: "arb-sepolia"
 parent_chain_name: "sepolia"
