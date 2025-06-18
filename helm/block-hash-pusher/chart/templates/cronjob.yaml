@@ -17,25 +17,25 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       name: block-hash-pusher-secret
-                      key: "{{ .Values.parent-chain-name }}-private-key"
+                      key: "{{ .Values.parent_chain_name }}-private-key"
                 - name: CHILD_PRIVATE_KEY
                   valueFrom:
                     secretKeyRef:
                       name: block-hash-pusher-secret
-                      key: "{{ .Values.child-chain-name }}-private-key"
+                      key: "{{ .Values.child_chain_name }}-private-key"
                 - name: PARENT_RPC_URL
                   valueFrom:
                     secretKeyRef:
                       name: block-hash-pusher-secret
-                      key: "{{ .Values.parent-chain-name }}-url"
+                      key: "{{ .Values.parent_chain_name }}-url"
                 - name: CHILD_RPC_URL
                   valueFrom:
                     secretKeyRef:
                       name: block-hash-pusher-secret
-                      key: "{{ .Values.child-chain-name }}-url"
+                      key: "{{ .Values.child_chain_name }}-url"
               args:
                 - "{{ .Values.inbox }}"
-                - "--num-blocks {{ .Values.num-blocks }}"
-                - "--min-elapsed {{ .Values.min-elapsed }}"
+                - "--num-blocks {{ .Values.num_blocks }}"
+                - "--min-elapsed {{ .Values.min_elapsed }}"
                 
           restartPolicy: Never
