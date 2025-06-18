@@ -9,8 +9,8 @@ WORKDIR /app
 
 RUN git clone https://github.com/OffchainLabs/block-hash-pusher.git .
 RUN git checkout 085872efb820563b9c50d85732457147523fbe67
-
 RUN yarn
 RUN yarn build
+RUN cp .env.example .env
 
 ENTRYPOINT ["yarn", "run:push"]
