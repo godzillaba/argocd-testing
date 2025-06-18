@@ -33,6 +33,10 @@ spec:
                     secretKeyRef:
                       name: block-hash-pusher-secret
                       key: "{{ .Values.child_chain_name }}-url"
-              args: "{{ .Values.inbox }} --num-blocks {{ .Values.num_blocks }} --min-elapsed {{ .Values.min_elapsed }}"
+              args: 
+                - > 
+                  {{ .Values.inbox }} 
+                  --num-blocks {{ .Values.num_blocks }} 
+                  --min-elapsed {{ .Values.min_elapsed }}
                 
           restartPolicy: Never
